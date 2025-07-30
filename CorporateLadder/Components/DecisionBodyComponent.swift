@@ -9,30 +9,52 @@ import SwiftUI
 
 struct DecisionBodyComponent: View {
     @Binding var viewModel: GameViewModel
+    @State private var selectedChoice: Choice? = nil
     
     var body: some View {
-        DecisionTextComponent(decision: viewModel.decision)
-        
-        Spacer()
-        
-        HStack(alignment: .center) {
-            Spacer()
-            ForEach(viewModel.decision.choices) { choice in
-                Button(choice.title) {
-                    viewModel.stressTotal += choice.stressValue
-                    viewModel.successTotal += choice.successValue
+        // Come back to this later to add this logic inside GameViewModel
+        if let selectedChoice {
+            VStack(alignment: .leading) {
+                Text(selectedChoice.title)
+                    .font(.largeTitle)
+                Text(selectedChoice.subtitle)
+                    .font(.body)
+                
+                if viewModel.month == .december {
+                    Button("End game") {
+                        self.selectedChoice = nil
+                        viewModel.gameState = .finished
+                    }
                     
-                    if viewModel.month != .march {
+                } else {
+                    Button("Next month") {
+                        self.selectedChoice = nil
                         viewModel.month = viewModel.month.next()
                     }
                 }
             }
+        } else {
+            DecisionTextComponent(decision: viewModel.decision)
+            
             Spacer()
+            
+            HStack(alignment: .center) {
+                Spacer()
+                ForEach(viewModel.decision.choices) { choice in
+                    Button(choice.title) {
+                        viewModel.handleChoice(choice)
+                        selectedChoice = choice
+                    }
+                }
+                Spacer()
+            }
         }
     }
 }
 
 #Preview {
     @Previewable @State var viewModel = GameViewModel()
-    DecisionBodyComponent(viewModel: $viewModel)
+    viewModel.month = .january
+    
+    return DecisionBodyComponent(viewModel: $viewModel)
 }

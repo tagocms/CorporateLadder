@@ -11,9 +11,15 @@ struct GameFinishedView: View {
     var viewModel: GameViewModel
     
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: 12) {
             Text("Game Finished!")
                 .font(.largeTitle)
+            
+            Text(viewModel.ending)
+                .font(.title3)
+            
+            Text(viewModel.affliction)
+                .font(.title3)
             
             Text("Do you want to play again?")
             

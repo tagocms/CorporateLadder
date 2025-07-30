@@ -11,24 +11,28 @@ struct GameLostView: View {
     var viewModel: GameViewModel
     
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: 12) {
             Text("Game Lost!")
                 .font(.largeTitle)
             
-            VStack {
-                Text("You have a total of \(viewModel.stressTotal) stress points, reaching a terrifying burnout that forced you to quit your job...")
-                Text("You almost made it to \(viewModel.goalChoice.rawValue) - with a total of \(viewModel.successTotal) success points -, but your stress got the best of you.")
+            VStack(alignment: .leading) {
+                Text(viewModel.affliction)
+                Text("You almost made it to \(viewModel.goalChoice.rawValue) - with a total of \(viewModel.successTotal) success points -, but your\(viewModel.stressTotal < 0 ? " lack of" : "") stress got the best of you.")
             }
             
             Text("Do you want to play again?")
             
             Button("Restart", action: viewModel.resetGame)
         }
-        .multilineTextAlignment(.center)
+        .multilineTextAlignment(.leading)
         .padding()
     }
 }
 
 #Preview {
-    GameLostView(viewModel: GameViewModel())
+    let viewModel = GameViewModel()
+    viewModel.stressTotal = 100
+    viewModel.goalChoice = .manager
+    
+    return GameLostView(viewModel: viewModel)
 }

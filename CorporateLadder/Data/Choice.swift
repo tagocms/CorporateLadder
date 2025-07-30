@@ -8,22 +8,6 @@
 import Foundation
 
 class Choice: Identifiable {
-    enum GoalChoice: String, CaseIterable {
-        case expert = "Expert"
-        case manager = "Manager"
-        case standard = "Standard"
-        
-        var goalValue: Int {
-            switch self {
-            case .expert:
-                return 100
-            case .manager:
-                return 200
-            default:
-                return 0
-            }
-        }
-    }
     enum ChoiceTag {
         case standard, project, course, coworker, delegate
     }
@@ -35,9 +19,8 @@ class Choice: Identifiable {
     var successValue: Int
     var goalChoice: GoalChoice?
     var tag: ChoiceTag
-    var isSelected: Bool
     
-    init(id: UUID = UUID(), title: String, subtitle: String, stressValue: Int, successValue: Int, goalChoice: GoalChoice? = nil, tag: ChoiceTag = .standard, isSelected: Bool = false) {
+    init(id: UUID = UUID(), title: String, subtitle: String, stressValue: Int, successValue: Int, goalChoice: GoalChoice? = nil, tag: ChoiceTag = .standard) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
@@ -45,6 +28,22 @@ class Choice: Identifiable {
         self.successValue = successValue
         self.goalChoice = goalChoice
         self.tag = tag
-        self.isSelected = isSelected
+    }
+}
+
+enum GoalChoice: String, CaseIterable {
+    case expert = "Expert"
+    case manager = "Manager"
+    case standard = "Standard"
+    
+    var goalValue: Int {
+        switch self {
+        case .expert:
+            return 100
+        case .manager:
+            return 200
+        default:
+            return 0
+        }
     }
 }

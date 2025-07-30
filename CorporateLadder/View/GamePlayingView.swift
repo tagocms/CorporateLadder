@@ -32,15 +32,14 @@ struct GamePlayingView: View {
         }
         .padding()
         .onChange(of: viewModel.stressTotal) {
-            if viewModel.stressTotal >= viewModel.stressMax {
-                viewModel.gameState = .lost
-            }
+            viewModel.stressCheck()
         }
     }
 }
 
 #Preview {
     @Previewable @State var viewModel = GameViewModel()
+    viewModel.month = .january
     
-    GamePlayingView(viewModel: $viewModel)
+    return GamePlayingView(viewModel: $viewModel)
 }

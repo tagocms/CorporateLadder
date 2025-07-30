@@ -8,28 +8,6 @@
 import Foundation
 
 class Decision: Identifiable {
-    enum Month: String, CaseIterable, Equatable {
-        case prologue = "Prologue"
-        case january = "January"
-        case february = "February"
-        case march = "March"
-        case april = "April"
-        case may = "May"
-        case june = "June"
-        case july = "July"
-        case august = "August"
-        case september = "September"
-        case october = "October"
-        case november = "November"
-        case december = "December"
-        
-        func next() -> Month {
-            let all = Self.allCases
-            let idx = all.firstIndex(of: self)!
-            let next = all.index(after: idx)
-            return all[next == all.endIndex ? idx : next]
-        }
-    }
     var id: UUID
     var title: Month
     var subtitle: String
@@ -52,7 +30,7 @@ class Decision: Identifiable {
     static func createDecisions() -> [Decision] {
         return [
             Decision(title: .january, subtitle: "The year starts at a slow pace... a lot of your coworkers are on vacation and there isn't much work to be done. So, you have a bright idea: how about pitching and developing a new project to your boss?", choices: [
-                Choice(title: "Pitch and develop project", subtitle: "You show initiative and your boss likes it, he even sponsors the project and puts it in a high priority list. You end up having to work overtime a few days, because you are also responsible for covering for your colleagues vacations.", stressValue: 10, successValue: 20),
+                Choice(title: "Pitch and develop project", subtitle: "You show initiative and your boss likes it, he even sponsors the project and puts it in a high priority list. You end up having to work overtime a few days, because you are also responsible for covering for your colleagues vacations.", stressValue: 10, successValue: 20, tag: .project),
                 Choice(title: "Keep working as usual", subtitle: "You enjoy your time covering for your colleague's vacations and do a great job doing so. Your boss congratulates you and tells you you are on the right path.", stressValue: 0, successValue: 5)
             ]),
             Decision(title: .february, subtitle: "February breathes life into the office, as people are starting to come back from vacation. Everyone's excited to share what they did during the holidays, and you don't mind hearing about their exploits...", choices: [
@@ -63,7 +41,71 @@ class Decision: Identifiable {
                 Choice(title: "Focus on finishing the project you pitched in January", subtitle: "You talk to your manager and are able to delegate your other tasks to your colleagues. You manage to finish and present your project to a room full of executives.", stressValue: 10, successValue: 20),
                 Choice(title: "Try to balance your regular workload with the development of the new products", subtitle: "You try to balance your workload and are able to deliver everything necessary, but feel extremely overwhelmed and tired. At least, you know you did a great job. Even so, hopefully, next month will be better...", stressValue: 20, successValue: 30),
                 Choice(title: "Renegotiate other deadlines and focus on the development of the new products", subtitle: "You are able to renegotiate your deadlines and work consistently on the new products. Your boss is pleased!", stressValue: 10, successValue: 20)
+            ]),
+            Decision(title: .april, subtitle: "The second quarter of the year starts with an HR training on how to be a great leader. Everyone in the company attends it and are told there is a follow-up course, in june, for only the highest-performing of workers. You know it's going to be hard, but consider applying anyway...", choices: [
+                Choice(title: "Apply for the course", subtitle: "Your boss is so proud of you! But, you know it's going to be necessary to make a few sacrifices along the way to becoming a high-performing employee...", stressValue: 10, successValue: 20, tag: .course),
+                Choice(title: "Don't apply for the course", subtitle: "Your boss is disappointed in you! But, at least, as you are not going to have to focus on the course, you'll have plenty of time to work on your regular activities.", stressValue: 0, successValue: 5)
+            ]),
+            Decision(title: .may, subtitle: "In May, you were met with a huge problem that required senior-level access to fix. But, the person who grants the access was on vacation, and only returned to work at the third week of the month. How can you fix this problem?", choices: [
+                Choice(title: "Try to bypass bureaucracy and get someone else to fix the problem for you", subtitle: "You had a coworker from a different department enter the system and fix the error, but you feel that was a little risky, so you did not take credit for it.", stressValue: 5, successValue: 10),
+                Choice(title: "Wait for the time it takes for the person to come back", subtitle: "Your boss was angry that you took too long to fix the problem, but was ultimately satisfied that it was done so well.", stressValue: 15, successValue: 25)
+            ]),
+            Decision(title: .june, subtitle: "This is it. The final weeks until the HR Course you applied to on April. But, if you are to get accepted, you must work harder in order to be the high-performing employee HR is looking for.", choices: [
+                Choice(title: "Push yourself to get accepted in the course and take it", subtitle: "You did it! You earned the high-performing stamp on your resume. Also, you got to take the course and ended up learning a lot of leadership skills. The problem is that this push for performance took a toll on you...", stressValue: 25, successValue: 40),
+                Choice(title: "Give up on the course", subtitle: "Frustrated, you give up on getting accepted into the course and do your regular work, as usual... but the feeling that you could have done more doesn't leave you...", stressValue: 10, successValue: 10),
+                Choice(title: "Do the bare minimum necessary for that month", subtitle: "You knew you had too much on your plate as it was, so feel like it was a wise decision to leave the list alone, for now.", stressValue: 0, successValue: 10),
+                Choice(title: "Push yourself and try to make your boss proud", subtitle: "You definitely did make your boss extremely proud! He congratulates you for a great month's work and send you on your way, exhausted but fulfilled...", stressValue: 15, successValue: 30)
+
+            ]),
+            Decision(title: .july, subtitle: "At the start of the second semester, a new coworker joins your team. She is eager to learn and start performing as soon as possible! Your boss asks you to mentor and train her during the next three months. Do you accept?", choices: [
+                Choice(title: "Train the new coworker", subtitle: "Training your new coworker is heavy work, but it's extremely rewarding to see someone grow, and your leadership skills are noticed.", stressValue: 15, successValue: 30, tag: .coworker),
+                Choice(title: "Politely refuse to train the new coworker", subtitle: "Your boss asks someone else on the team to do it and you lose this opportunity for developing leadership skills, but at least you are not overwhelmed with work.", stressValue: 0, successValue: 5)
+            ]),
+            Decision(title: .august, subtitle: "In August, someone said something. It got repeated. People started talking. Heads turned, whispers spread. The office felt different, a quiet buzz of new information. Office gossip at its finest. Apparently, one of your coworkers had an affair with a manager from another team, but both of them are married to other people!! How enticing...", choices: [
+                Choice(title: "Gossip about your coworker", subtitle: "Somehow, talking about someone else's problems makes you feel a little bit better, but it's wrong to feel this way, right??", stressValue: -10, successValue: 0),
+                Choice(title: "Don't gossip about your coworker, their life is private", subtitle: "You are a righteous person, you would never bad-mouth someone. Your empathic behavior is admirable!", stressValue: 0, successValue: 10)
+            ]),
+            Decision(title: .september, subtitle: "The new coworker made a huge mistake and didn't tell anyone, until that mistake blew up in your face. What do you do?", choices: [
+                Choice(title: "Accept responsability for the mistake and help her correct it", subtitle: "You and your coworker, together, correct the problem and report it to your boss. He's satisfied, and tells you to be more perceptive next time.", stressValue: 20, successValue: 25),
+                Choice(title: "Pin the mistake on your new coworker", subtitle: "You tell your boss that the mistake happened and it was your coworker's fault, and he tells her to fix it by herself.", stressValue: 10, successValue: 10),
+                Choice(title: "Reach out and try to help her", subtitle: "You and your coworker, together, correct the problem and report it to your boss. He's satisfied.", stressValue: 15, successValue: 20),
+                Choice(title: "Ignore this problem and focus on your own work", subtitle: "You focus on your own work this month, and let the person who trained the new employee help her out this time.", stressValue: 0, successValue: 10)
+            ]),
+            Decision(title: .october, subtitle: "Finally, the fourth quarter arrives. These are the last three months of the year, where you can truly make a difference and show everyone what you are about. Coincidentally, a new, big project is announced and your boss nominates you to represent your department. You can choose to bring someone else to help you or try to deal with it on your own. What do you do?", choices: [
+                Choice(title: "Deal with this final project alone", subtitle: "You show you are capable of dealing with huge projects on your own and demonstrate autonomy. But, you know these are going to be really hard months...", stressValue: 20, successValue: 30),
+                Choice(title: "Bring someone from your team to help you", subtitle: "You call your new coworker to help you on this project, which might be wise, considering the amount of work you already have to deal with and the fact that you two have already worked closely together before.", stressValue: 10, successValue: 20, tag: .delegate)
+            ]),
+            Decision(title: .november, subtitle: "November brings a new challenge regarding the project: other departments have failed to do their parts of the work and now a lot of it has fallen on your hands. What do you do?", choices: [
+                Choice(title: "Do all the necessary work", subtitle: "The work is done and you are seen as an authority and respected by other people in the project. But, you question if it was worth it...", stressValue: 20, successValue: 20),
+                Choice(title: "Do only your part and communicate your boss about the situation", subtitle: "You do what you feel is right. If the other departments didn't care enough to do their job, why would you do it? It's only fair that you do your part and that's it.", stressValue: 5, successValue: 10)
+            ]),
+            Decision(title: .december, subtitle: "December arrives with a creeping realization... you had scheduled a vacation for this month, but you must also finish the project until the end of the year...", choices: [
+                Choice(title: "Take a vacation", subtitle: "That vacation really did help you relax... the world will not end if you are not working. Though, you wonder if your boss didn't expect you to stay and finish that project...", stressValue: -50, successValue: -20),
+                Choice(title: "Postpone your vacation and finish the project", subtitle: "Postponing your vacation takes a huge toll on you... but maybe it was for the best - you wonder - as you could finish the project on time and your boss was happy. After this, it's time for a well earned rest...", stressValue: 50, successValue: 40)
             ])
         ]
+    }
+}
+
+enum Month: String, CaseIterable, Equatable {
+    case prologue = "Prologue"
+    case january = "January"
+    case february = "February"
+    case march = "March"
+    case april = "April"
+    case may = "May"
+    case june = "June"
+    case july = "July"
+    case august = "August"
+    case september = "September"
+    case october = "October"
+    case november = "November"
+    case december = "December"
+    
+    func next() -> Month {
+        let all = Self.allCases
+        let idx = all.firstIndex(of: self)!
+        let next = all.index(after: idx)
+        return all[next == all.endIndex ? idx : next]
     }
 }

@@ -19,9 +19,7 @@ struct PrologueBodyComponent: View {
             Spacer()
             ForEach(viewModel.prologue.choices) { choice in
                 Button(choice.title) {
-                    viewModel.goalChoice = choice.goalChoice!
-                    viewModel.month = .january
-                    viewModel.gameState = .beggining
+                    viewModel.handlePrologueChoice(choice)
                 }
             }
             Spacer()
