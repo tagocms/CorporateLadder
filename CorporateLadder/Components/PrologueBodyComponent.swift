@@ -8,23 +8,20 @@
 import SwiftUI
 
 struct PrologueBodyComponent: View {
-    let decision: Decision
-    @Binding var gameState: GameState
-    @Binding var goalChoice: GoalChoice
-    @Binding var month: Month
+    @Binding var viewModel: GameViewModel
     
     var body: some View {
-        DecisionTextComponent(decision: decision)
+        DecisionTextComponent(decision: viewModel.prologue)
         
         Spacer()
         
         HStack(alignment: .center) {
             Spacer()
-            ForEach(decision.choices) { choice in
+            ForEach(viewModel.prologue.choices) { choice in
                 Button(choice.title) {
-                    goalChoice = choice.goalChoice!
-                    month = .january
-                    gameState = .beggining
+                    viewModel.goalChoice = choice.goalChoice!
+                    viewModel.month = .january
+                    viewModel.gameState = .beggining
                 }
             }
             Spacer()
@@ -33,9 +30,7 @@ struct PrologueBodyComponent: View {
 }
 
 #Preview {
-    @Previewable @State var month = Month.prologue
-    @Previewable @State var gameState = GameState.prologue
-    @Previewable @State var goalChoice = GoalChoice.standard
+    @Previewable @State var viewModel = GameViewModel()
     
-    PrologueBodyComponent(decision: Decision.createDecisions()[0], gameState: $gameState, goalChoice: $goalChoice, month: $month)
+    PrologueBodyComponent(viewModel: $viewModel)
 }

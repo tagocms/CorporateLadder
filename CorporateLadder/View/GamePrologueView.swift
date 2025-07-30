@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct GamePrologueView: View {
-    let prologue = Decision.createPrologue()
-    @Binding var gameState: GameState
-    @Binding var goalChoice: GoalChoice
-    @Binding var month: Month
+    @Binding var viewModel: GameViewModel
     
     var body: some View {
-        PrologueBodyComponent(decision: prologue, gameState: $gameState, goalChoice: $goalChoice, month: $month)
-        
-        Spacer()
+        VStack {
+            Spacer()
+            
+            PrologueBodyComponent(viewModel: $viewModel)
+            
+            Spacer()
+        }
+        .padding()
     }
 }
 
 #Preview {
-    @Previewable @State var gameState = GameState.prologue
-    @Previewable @State var goalChoice = GoalChoice.standard
-    @Previewable @State var month = Month.prologue
-    GamePrologueView(gameState: $gameState, goalChoice: $goalChoice, month: $month)
+    @Previewable @State var viewModel = GameViewModel()
+    GamePrologueView(viewModel: $viewModel)
 }

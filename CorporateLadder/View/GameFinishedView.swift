@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct GameFinishedView: View {
-    let stressTotal: Int
-    let successTotal: Int
-    let goalChoice: GoalChoice
+    var viewModel: GameViewModel
     
     var body: some View {
-        Text("Game Finished!")
+        VStack(spacing: 12) {
+            Text("Game Finished!")
+                .font(.largeTitle)
+            
+            Text("Do you want to play again?")
+            
+            Button("Restart", action: viewModel.resetGame)
+        }
+        .padding()
     }
 }
 
 #Preview {
-    GameFinishedView(stressTotal: 90, successTotal: 200, goalChoice: .manager)
+    GameFinishedView(viewModel: GameViewModel())
 }

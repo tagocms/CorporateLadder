@@ -8,25 +8,22 @@
 import SwiftUI
 
 struct DecisionBodyComponent: View {
-    let decision: Decision
-    @Binding var month: Month
-    @Binding var stressTotal: Int
-    @Binding var successTotal: Int
+    @Binding var viewModel: GameViewModel
     
     var body: some View {
-        DecisionTextComponent(decision: decision)
+        DecisionTextComponent(decision: viewModel.decision)
         
         Spacer()
         
         HStack(alignment: .center) {
             Spacer()
-            ForEach(decision.choices) { choice in
+            ForEach(viewModel.decision.choices) { choice in
                 Button(choice.title) {
-                    stressTotal += choice.stressValue
-                    successTotal += choice.successValue
+                    viewModel.stressTotal += choice.stressValue
+                    viewModel.successTotal += choice.successValue
                     
-                    if month != .march {
-                        month = month.next()
+                    if viewModel.month != .march {
+                        viewModel.month = viewModel.month.next()
                     }
                 }
             }
@@ -36,8 +33,6 @@ struct DecisionBodyComponent: View {
 }
 
 #Preview {
-    @Previewable @State var month = Month.january
-    @Previewable @State var stressTotal = 0
-    @Previewable @State var successTotal = 0
-    DecisionBodyComponent(decision: Decision.createDecisions()[0], month: $month, stressTotal: $stressTotal, successTotal: $successTotal)
+    @Previewable @State var viewModel = GameViewModel()
+    DecisionBodyComponent(viewModel: $viewModel)
 }

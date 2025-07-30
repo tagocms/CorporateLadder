@@ -8,6 +8,28 @@
 import Foundation
 
 class Decision: Identifiable {
+    enum Month: String, CaseIterable, Equatable {
+        case prologue = "Prologue"
+        case january = "January"
+        case february = "February"
+        case march = "March"
+        case april = "April"
+        case may = "May"
+        case june = "June"
+        case july = "July"
+        case august = "August"
+        case september = "September"
+        case october = "October"
+        case november = "November"
+        case december = "December"
+        
+        func next() -> Month {
+            let all = Self.allCases
+            let idx = all.firstIndex(of: self)!
+            let next = all.index(after: idx)
+            return all[next == all.endIndex ? idx : next]
+        }
+    }
     var id: UUID
     var title: Month
     var subtitle: String
@@ -22,7 +44,7 @@ class Decision: Identifiable {
     }
     
     static func createPrologue() -> Decision {
-        return Decision(title: .prologue, subtitle: "At the end of the year, you have a performance review with your boss. He tells you that you did okay this year, but if you wanted to get a promotion, you would need to set a goal and work towards it. What is your goal?", choices: [
+        return Decision(title: .prologue, subtitle: "At the end of the year, you have a performance review with your boss. He tells you that you did okay this year, but if you wanted to get a promotion by the end of the next year, you would need to set a goal and work towards it. What is your goal?", choices: [
             Choice(title: "Promotion to Expert", subtitle: "You desire to be an expert in your field.", stressValue: 0, successValue: 0, goalChoice: .expert),
             Choice(title: "Promotion to Manager", subtitle: "You desire to become a manager.", stressValue: 0, successValue: 0, goalChoice: .manager),
         ])
@@ -43,28 +65,5 @@ class Decision: Identifiable {
                 Choice(title: "Renegotiate other deadlines and focus on the development of the new products", subtitle: "You are able to renegotiate your deadlines and work consistently on the new products. Your boss is pleased!", stressValue: 10, successValue: 20)
             ])
         ]
-    }
-}
-
-enum Month: String, CaseIterable, Equatable {
-    case prologue = "Prologue"
-    case january = "January"
-    case february = "February"
-    case march = "March"
-    case april = "April"
-    case may = "May"
-    case june = "June"
-    case july = "July"
-    case august = "August"
-    case september = "September"
-    case october = "October"
-    case november = "November"
-    case december = "December"
-    
-    func next() -> Month {
-        let all = Self.allCases
-        let idx = all.firstIndex(of: self)!
-        let next = all.index(after: idx)
-        return all[next == all.endIndex ? idx : next]
     }
 }

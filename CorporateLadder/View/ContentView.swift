@@ -8,24 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var gameState = GameState.prologue
-    @State private var month = Month.prologue
-    @State private var stressTotal = 0
-    @State private var successTotal = 0
-    @State private var goalChoice = GoalChoice.standard
+    @State private var viewModel = GameViewModel()
     
     var body: some View {
-        switch gameState {
+        switch viewModel.gameState {
         case .prologue:
-            GamePrologueView(gameState: $gameState, goalChoice: $goalChoice, month: $month)
+            GamePrologueView(viewModel: $viewModel)
         case .beggining:
-            GameBegginingView(gameState: $gameState)
+            GameBegginingView(viewModel: $viewModel)
         case .playing:
-            GamePlayingView(goalChoice: goalChoice, gameState: $gameState, month: $month, stressTotal: $stressTotal, successTotal: $successTotal)
+            GamePlayingView(viewModel: $viewModel)
         case .finished:
-            GameFinishedView(stressTotal: stressTotal, successTotal: successTotal, goalChoice: goalChoice)
+            GameFinishedView(viewModel: viewModel)
         case .lost:
-            GameLostView(stressTotal: stressTotal, successTotal: successTotal, goalChoice: goalChoice, month: month)
+            GameLostView(viewModel: viewModel)
         }
     }
 }

@@ -8,60 +8,39 @@
 import SwiftUI
 
 struct GamePlayingView: View {
-    private let decisions = Decision.createDecisions()
-    private let stressMax = 100
-    
-    let goalChoice: GoalChoice
-    
-    @Binding var gameState: GameState
-    
-    @Binding var month: Month
-    @Binding var stressTotal: Int
-    @Binding var successTotal: Int
-    
-    private var decision: Decision {
-        let decision = decisions.first(where: {$0.title == month})
-        
-        if let decision {
-            return decision
-        } else {
-            fatalError("Data was not found.")
-        }
-    }
+    @Binding var viewModel: GameViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Success Goal: \(goalChoice.goalValue)")
+                Text("Success Goal: \(viewModel.goalChoice.goalValue)")
                     .font(.subheadline)
                 Spacer()
-                Text("Stress: \(stressTotal)")
+                Text("Stress: \(viewModel.stressTotal)")
                     .font(.subheadline)
                 Spacer()
-                Text("Success: \(successTotal)")
+                Text("Success: \(viewModel.successTotal)")
                     .font(.subheadline)
             }
             
-            DecisionBodyComponent(decision: decision, month: $month, stressTotal: $stressTotal, successTotal: $successTotal)
+            Spacer()
+            
+            DecisionBodyComponent(viewModel: $viewModel)
             
             Spacer()
             
         }
         .padding()
-        .onChange(of: stressTotal) {
-            if stressTotal >= stressMax {
-                gameState = .lost
+        .onChange(of: viewModel.stressTotal) {
+            if viewModel.stressTotal >= viewModel.stressMax {
+                viewModel.gameState = .lost
             }
         }
     }
 }
 
 #Preview {
-    @Previewable @State var gameState = GameState.playing
-    @Previewable @State var month = Month.january
-    @Previewable @State var stressTotal = 0
-    @Previewable @State var successTotal = 0
-    let goalChoice = GoalChoice.expert
+    @Previewable @State var viewModel = GameViewModel()
     
-    GamePlayingView(goalChoice: goalChoice, gameState: $gameState, month: $month, stressTotal: $stressTotal, successTotal: $successTotal)
+    GamePlayingView(viewModel: $viewModel)
 }
