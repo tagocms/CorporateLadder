@@ -17,8 +17,8 @@ class GameViewModel {
     let stressMax = 100
     var goalChoice = GoalChoice.standard
     
-    let decisions = Decision.createDecisions()
-    let prologue = Decision.createPrologue()
+    var decisions = Decision.createDecisions()
+    var prologue = Decision.createPrologue()
     
     var decision: Decision {
         let decision = decisions.first(where: {$0.title == month})
@@ -91,13 +91,38 @@ class GameViewModel {
         case .standard:
             break
         case .project:
-            <#code#>
+            let decision = decisions[2] // March
+            let choiceAffected = decision.choices[0]
+            choiceAffected.stressValue = 20
+            choiceAffected.successValue = 30
+            decision.choices.remove(at: 1)
+            
+            decision.choices.append(Choice(title: "Focus on finishing the project you pitched in January", subtitle: "You talk to your manager and are able to delegate your other tasks to your colleagues. You manage to finish and present your project to a room full of executives.", stressValue: 10, successValue: 20))
         case .course:
-            <#code#>
+            let decision = decisions[5] // June
+            decision.subtitle = "This is it. The final weeks until the HR Course you applied to on April. But, if you are to get accepted, you must work harder in order to be the high-performing employee HR is looking for."
+            
+            decision.choices.removeAll()
+            decision.choices.append(contentsOf: [Choice(title: "Push yourself to get accepted in the course and take it", subtitle: "You did it! You earned the high-performing stamp on your resume. Also, you got to take the course and ended up learning a lot of leadership skills. The problem is that this push for performance took a toll on you...", stressValue: 25, successValue: 40),
+            Choice(title: "Give up on the course", subtitle: "Frustrated, you give up on getting accepted into the course and do your regular work, as usual... but the feeling that you could have done more doesn't leave you...", stressValue: 10, successValue: 10)])
         case .coworker:
-            <#code#>
+            let decision = decisions[8] // September
+            
+            decision.choices.removeAll()
+            decision.choices.append(contentsOf: [Choice(title: "Accept responsability for the mistake and help her correct it", subtitle: "You and your coworker, together, correct the problem and report it to your boss. He's satisfied, and tells you to be more perceptive next time.", stressValue: 20, successValue: 25),
+            Choice(title: "Pin the mistake on your new coworker", subtitle: "You tell your boss that the mistake happened and it was your coworker's fault, and he tells her to fix it by herself.", stressValue: 10, successValue: 10)])
+            
+            let otherAffectedDecision = decisions[9] // October
+            otherAffectedDecision.choices[1].subtitle = "You call your new coworker to help you on this project, which might be wise, considering the amount of work you already have to deal with and the fact that you two have already worked closely together before."
+            
         case .delegate:
-            <#code#>
+            let novemberDecision = decisions[10]
+            novemberDecision.choices[0].stressValue = 15
+            novemberDecision.choices[1].stressValue = 0
+            
+            let decemberDecision = decisions[11]
+            decemberDecision.choices[0].successValue = -10
+            decemberDecision.choices[1].stressValue = 30
         }
     }
     
@@ -113,5 +138,7 @@ class GameViewModel {
         stressTotal = 0
         successTotal = 0
         goalChoice = GoalChoice.standard
+        decisions = Decision.createDecisions()
+        prologue = Decision.createPrologue()
     }
 }
