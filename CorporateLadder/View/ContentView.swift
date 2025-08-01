@@ -12,16 +12,20 @@ struct ContentView: View {
     
     var body: some View {
         switch viewModel.gameState {
+        case .start:
+            EmptyView()
         case .prologue:
             GamePrologueView(viewModel: $viewModel)
         case .beggining:
             GameBegginingView(viewModel: $viewModel)
         case .playing:
             GamePlayingView(viewModel: $viewModel)
-        case .finished:
+        case .ending:
             GameFinishedView(viewModel: viewModel)
         case .lost:
             GameLostView(viewModel: viewModel)
+        case .final:
+            EmptyView()
         }
     }
 }

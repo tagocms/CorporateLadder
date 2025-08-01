@@ -10,10 +10,38 @@
 		660B87AD2E3A423D000F7B33 /* CorporateLadder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CorporateLadder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		660B881A2E3D7C36000F7B33 /* Exceptions for "CorporateLadder" folder in "CorporateLadder" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 660B87AC2E3A423D000F7B33 /* CorporateLadder */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		660B87AF2E3A423D000F7B33 /* CorporateLadder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				660B881A2E3D7C36000F7B33 /* Exceptions for "CorporateLadder" folder in "CorporateLadder" target */,
+			);
 			path = CorporateLadder;
+			sourceTree = "<group>";
+		};
+		660B87F02E3D7BA9000F7B33 /* Fonts */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		660B881B2E3D7F11000F7B33 /* Extensions */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		660B881E2E3D7FC3000F7B33 /* ViewModifiers */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +60,9 @@
 		660B87A42E3A423D000F7B33 = {
 			isa = PBXGroup;
 			children = (
+				660B881E2E3D7FC3000F7B33 /* ViewModifiers */,
+				660B881B2E3D7F11000F7B33 /* Extensions */,
+				660B87F02E3D7BA9000F7B33 /* Fonts */,
 				660B87AF2E3A423D000F7B33 /* CorporateLadder */,
 				660B87AE2E3A423D000F7B33 /* Products */,
 			);
@@ -62,6 +93,9 @@
 			);
 			fileSystemSynchronizedGroups = (
 				660B87AF2E3A423D000F7B33 /* CorporateLadder */,
+				660B87F02E3D7BA9000F7B33 /* Fonts */,
+				660B881B2E3D7F11000F7B33 /* Extensions */,
+				660B881E2E3D7FC3000F7B33 /* ViewModifiers */,
 			);
 			name = CorporateLadder;
 			packageProductDependencies = (
@@ -256,12 +290,14 @@
 				DEVELOPMENT_TEAM = 22MHF556GA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CorporateLadder/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.role-playing-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -285,12 +321,14 @@
 				DEVELOPMENT_TEAM = 22MHF556GA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CorporateLadder/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.role-playing-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

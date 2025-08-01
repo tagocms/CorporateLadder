@@ -23,7 +23,7 @@ struct DecisionBodyComponent: View {
                 if viewModel.month == .december {
                     Button("End game") {
                         self.selectedChoice = nil
-                        viewModel.gameState = .finished
+                        viewModel.gameState = .ending
                     }
                     
                 } else {

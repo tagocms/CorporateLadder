@@ -18,7 +18,7 @@ struct GameBegginingView: View {
                 Text("As the year begins, you know what you have to do to achieve your goals. But, are you prepared to make those choices?")
                 Text("You have 12 months to perform the best you can, and each of the choices you make can add to your stress points and/or success points.")
                 Text("Your goal is to reach the \(viewModel.goalChoice.rawValue) position, and that requires a total of \(viewModel.goalChoice.goalValue) success points.")
-                Text("You also have to limit your stress level, so you don't exceed 100 stress points.")
+                Text("You also have to limit your stress level, so you don't exceed \(viewModel.stressMax) stress points.")
             }
             .font(.body)
         }
