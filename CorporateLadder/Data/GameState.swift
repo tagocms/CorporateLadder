@@ -11,6 +11,4 @@ enum GameState {
     case start
     case playing
     case ending
-    case lost
-    case final
 }

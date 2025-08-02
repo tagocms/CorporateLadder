@@ -168,7 +168,7 @@ class GameViewModel {
     
     func stressCheck() {
         if stressTotal >= stressMax {
-            gameState = .lost
+            gameState = .ending
         }
     }
     

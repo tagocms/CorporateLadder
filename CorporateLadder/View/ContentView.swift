@@ -21,10 +21,6 @@ struct ContentView: View {
         case .ending:
             GameFinishedView(viewModel: viewModel)
                 .transition(.blurReplace)
-        case .lost:
-            GameLostView(viewModel: viewModel)
-        case .final:
-            EmptyView()
         }
     }
 }

@@ -16,7 +16,7 @@ struct CLDecisionBodyComponent: View {
         if let selectedChoice {
             VStack(alignment: .leading) {
                 if viewModel.month == .prologue {
-                    CLHeaderTextComponent(title: viewModel.month.rawValue, subtitle: "As the year begins, you know what you have to do to achieve your goals. But, are you prepared to make those choices?\n\nYou have 12 months to perform the best you can, and each of the choices you make can add to your stress points and/or success points.\n\nYour goal is to reach the \(viewModel.goalChoice.rawValue) position, and that requires a total of \(viewModel.goalChoice.goalValue) success points.\n\nYou also have to limit your stress level, so you don't exceed \(viewModel.stressMax) stress points.", callToAction: "", color: viewModel.feelingColor)
+                    CLHeaderTextComponent(isPrologue: true, color: viewModel.feelingColor, goalChoice: viewModel.goalChoice)
                 } else {
                     CLHeaderTextComponent(title: viewModel.month.rawValue, subtitle: selectedChoice.subtitle, callToAction: "", color: viewModel.feelingColor)
                 }
@@ -27,7 +27,7 @@ struct CLDecisionBodyComponent: View {
                     CLStressBarComponent(color: viewModel.feelingColor, currentValue: viewModel.stressTotal)
                     
                     if viewModel.month == .december {
-                        CLDocumentButtonComponent(color: viewModel.feelingColorImage, text: "Tap to end game...") {
+                        CLDocumentButtonComponent(color: viewModel.feelingColorImage, text: "Tap to move on...") {
                             withAnimation() {
                                 self.selectedChoice = nil
                                 viewModel.gameState = .ending
