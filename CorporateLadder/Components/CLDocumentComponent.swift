@@ -12,8 +12,8 @@ struct CLDocumentComponent: View {
     let colorSelected: String
     let choices: [Choice]
     let isPrologue: Bool
-    let actionRight: () -> Void
-    let actionLeft: () -> Void
+    let actionLeft: (Choice) -> Void
+    let actionRight: (Choice) -> Void
     
     @State private var color: String
     @State private var offset = CGSize.zero
@@ -44,7 +44,7 @@ struct CLDocumentComponent: View {
             }
             
             if offset.width != .zero {
-                Image("Stamp")
+                Image(color != "Black" ? "Stamp" : "StampWhite")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100)
@@ -63,10 +63,10 @@ struct CLDocumentComponent: View {
                     offset = value.translation
                     
                     withAnimation(nil) {
-                        if width > 1 {
+                        if width < -1 {
                             choiceText = "\(choices[0].title)"
                             choiceValues = "+\(choices[0].stressValue) Stress\n+\(choices[0].successValue) Success"
-                        } else if width < -1 {
+                        } else if width > 1 {
                             choiceText = "\(choices[1].title)"
                             choiceValues = "+\(choices[1].stressValue) Stress\n+\(choices[1].successValue) Success"
                         }
@@ -76,10 +76,10 @@ struct CLDocumentComponent: View {
                     color = colorIdle
                     let width = value.translation.width
                     
-                    if width > 100 {
-                        actionRight()
-                    } else if width < -100 {
-                        actionLeft()
+                    if width < -100 {
+                        actionLeft(choices[0])
+                    } else if width > 100 {
+                        actionRight(choices[1])
                     } else {
                         withAnimation() {
                             offset = CGSize.zero
@@ -91,7 +91,7 @@ struct CLDocumentComponent: View {
         )
     }
     
-    init(colorIdle: String, colorSelected: String, choices: [Choice], isPrologue: Bool, actionRight: @escaping () -> Void, actionLeft: @escaping () -> Void) {
+    init(colorIdle: String, colorSelected: String, choices: [Choice], isPrologue: Bool, actionLeft: @escaping (Choice) -> Void, actionRight: @escaping (Choice) -> Void) {
         // Validate if the number of choices are equal to 2
         guard choices.count == 2 else {
             fatalError("Not enough choices.")
@@ -101,13 +101,13 @@ struct CLDocumentComponent: View {
         self.colorSelected = colorSelected
         self.choices = choices
         self.isPrologue = isPrologue
-        self.actionRight = actionRight
         self.actionLeft = actionLeft
+        self.actionRight = actionRight
         
         _color = State(initialValue: colorIdle)
     }
 }
 
 #Preview {
-    CLDocumentComponent(colorIdle: "LightGrey", colorSelected:  "LightBlue", choices: Decision.createDecisions()[0].choices, isPrologue: false, actionRight: { }, actionLeft: { })
+    CLDocumentComponent(colorIdle: "LightGrey", colorSelected:  "Black", choices: Decision.createDecisions()[0].choices, isPrologue: false, actionLeft: { _ in }, actionRight: { _ in })
 }

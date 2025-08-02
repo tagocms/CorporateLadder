@@ -12,13 +12,11 @@ struct GamePrologueView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            
             CLPrologueBodyComponent(viewModel: $viewModel)
             
             Spacer()
         }
-        .padding()
+        .padding(24)
     }
 }
 

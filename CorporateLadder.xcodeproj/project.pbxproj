@@ -29,16 +29,6 @@
 			path = CorporateLadder;
 			sourceTree = "<group>";
 		};
-		660B87F02E3D7BA9000F7B33 /* Fonts */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		660B881B2E3D7F11000F7B33 /* Extensions */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +45,6 @@
 		660B87A42E3A423D000F7B33 = {
 			isa = PBXGroup;
 			children = (
-				660B881B2E3D7F11000F7B33 /* Extensions */,
-				660B87F02E3D7BA9000F7B33 /* Fonts */,
 				660B87AF2E3A423D000F7B33 /* CorporateLadder */,
 				660B87AE2E3A423D000F7B33 /* Products */,
 			);
@@ -87,8 +75,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				660B87AF2E3A423D000F7B33 /* CorporateLadder */,
-				660B87F02E3D7BA9000F7B33 /* Fonts */,
-				660B881B2E3D7F11000F7B33 /* Extensions */,
 			);
 			name = CorporateLadder;
 			packageProductDependencies = (

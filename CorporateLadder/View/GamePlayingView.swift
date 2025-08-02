@@ -12,25 +12,9 @@ struct GamePlayingView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("Success Goal: \(viewModel.goalChoice.goalValue)")
-                    .font(.subheadline)
-                Spacer()
-                Text("Stress: \(viewModel.stressTotal)")
-                    .font(.subheadline)
-                Spacer()
-                Text("Success: \(viewModel.successTotal)")
-                    .font(.subheadline)
-            }
-            
-            Spacer()
-            
             CLDecisionBodyComponent(viewModel: $viewModel)
-            
-            Spacer()
-            
         }
-        .padding()
+        .padding(24)
         .onChange(of: viewModel.stressTotal) {
             viewModel.stressCheck()
         }
@@ -40,6 +24,7 @@ struct GamePlayingView: View {
 #Preview {
     @Previewable @State var viewModel = GameViewModel()
     viewModel.month = .january
+    viewModel.goalChoice = .manager
     
     return GamePlayingView(viewModel: $viewModel)
 }

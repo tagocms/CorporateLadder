@@ -12,21 +12,21 @@ struct CLDecisionTextComponent: View {
     let color: Color
     
     var body: some View {
-        ZStack {
-            Color.white
-            
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 30) {
                 Text(decision.title.rawValue)
                     .poppinsLargeTitle()
                     .foregroundStyle(color)
                 
-                Text(decision.subtitle)
-                    .robotoBody()
-                +
-                Text(" \(decision.callToAction)")
-                    .robotoBodySemibold()
+                ScrollView {
+                    Text(decision.subtitle)
+                        .robotoBody()
+                    +
+                    Text(" \(decision.callToAction)")
+                        .robotoBodySemibold()
+                }
+                .frame(height: UIScreen.main.bounds.height * 0.15)
+                .scrollBounceBehavior(.basedOnSize)
             }
-        }
     }
 }
 

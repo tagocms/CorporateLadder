@@ -49,6 +49,23 @@ class GameViewModel {
         }
     }
     
+    var feelingColorImage: String {
+        switch stressTotal {
+        case ..<0:
+            return "LightBlue"
+        case 0..<30:
+            return "LightBlue"
+        case 30..<60:
+            return "Orange"
+        case 60..<90:
+            return "DarkOrange"
+        case 90...:
+            return "Black"
+        default:
+            return "LightBlue"
+        }
+    }
+    
     var affliction: String {
         switch stressTotal {
         case ..<0:

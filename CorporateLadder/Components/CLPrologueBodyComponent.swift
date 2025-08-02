@@ -11,18 +11,28 @@ struct CLPrologueBodyComponent: View {
     @Binding var viewModel: GameViewModel
     
     var body: some View {
-        CLDecisionTextComponent(decision: viewModel.prologue, color: viewModel.feelingColor)
-        
-        Spacer()
-        
-        HStack(alignment: .center) {
-            Spacer()
-            ForEach(viewModel.prologue.choices) { choice in
-                Button(choice.title) {
-                    viewModel.handlePrologueChoice(choice)
-                }
+        VStack(alignment: .center, spacing: 30) {
+            CLDecisionTextComponent(decision: viewModel.prologue, color: viewModel.feelingColor)
+            
+            CLDocumentComponent(colorIdle: "LightGrey", colorSelected: "LightBlue", choices: viewModel.prologue.choices, isPrologue: true) {
+                viewModel.handlePrologueChoice($0)
+            } actionRight: {
+                viewModel.handlePrologueChoice($0)
             }
-            Spacer()
+            
+            VStack(alignment: .leading) {
+                Text("Swipe the document to the").robotoBody()
+                + Text(" left ").robotoBodySemibold()
+                + Text("to set your goal to be an").robotoBody()
+                + Text(" Expert").robotoBodySemibold()
+                + Text(".").robotoBody()
+                
+                Text("\nSwipe the document to the").robotoBody()
+                + Text(" right ").robotoBodySemibold()
+                + Text("to set your goal to be a").robotoBody()
+                + Text(" Manager").robotoBodySemibold()
+                + Text(".").robotoBody()
+            }
         }
     }
 }

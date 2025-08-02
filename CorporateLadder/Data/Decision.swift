@@ -24,7 +24,7 @@ class Decision: Identifiable {
     }
     
     static func createPrologue() -> Decision {
-        return Decision(title: .prologue, subtitle: "At the end of the year, you have a performance review with your boss. \nHe tells you that you did okay this year, but if you wanted to get a promotion by the end of the next year, you would need to set a goal and work towards it.", callToAction: "What is your goal?", choices: [
+        return Decision(title: .prologue, subtitle: "At the end of the year, you have a performance review with your boss. \n\nHe tells you that you did okay this year, but if you wanted to get a promotion by the end of the next year, you would need to set a goal and work towards it.", callToAction: "What is your goal?", choices: [
             Choice(title: "Promotion to Expert", subtitle: "You desire to be an expert in your field.", stressValue: 0, successValue: 0, goalChoice: .expert),
             Choice(title: "Promotion to Manager", subtitle: "You desire to become a manager.", stressValue: 0, successValue: 0, goalChoice: .manager),
         ])
