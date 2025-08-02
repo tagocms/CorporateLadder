@@ -11,9 +11,19 @@ struct CLStressBarComponent: View {
     let color: Color
     let currentValue: Int
     
-    let maxValue = 100.0
+    let maxValue = 100
     let barHeight = 16.0
     let circleHeight = 40.0
+    
+    var progressValue: CGFloat {
+        if currentValue < 0 {
+            return 0
+        } else if currentValue > maxValue {
+            return CGFloat(maxValue)
+        } else {
+            return CGFloat(currentValue)
+        }
+    }
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -40,7 +50,7 @@ struct CLStressBarComponent: View {
                         
                         RoundedRectangle(cornerRadius: 24)
                             .foregroundStyle(color)
-                            .frame(width: geometry.size.width * CGFloat(currentValue) / CGFloat(maxValue), height: barHeight)
+                            .frame(width: geometry.size.width * progressValue / CGFloat(maxValue), height: barHeight)
                         
                         Circle()
                             .fill(.white)
@@ -69,5 +79,5 @@ struct CLStressBarComponent: View {
 }
 
 #Preview {
-    CLStressBarComponent(color: .clLightBlue, currentValue: 60)
+    CLStressBarComponent(color: .clLightBlue, currentValue: 100)
 }

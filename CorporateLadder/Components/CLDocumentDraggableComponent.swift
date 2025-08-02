@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-struct CLDocumentComponent: View {
+struct CLDocumentDraggableComponent: View {
     let colorIdle: String
     let colorSelected: String
     let choices: [Choice]
     let isPrologue: Bool
-    let actionLeft: (Choice) -> Void
-    let actionRight: (Choice) -> Void
+    let action: (Choice) -> Void
     
     @State private var color: String
     @State private var offset = CGSize.zero
@@ -65,10 +64,10 @@ struct CLDocumentComponent: View {
                     withAnimation(nil) {
                         if width < -1 {
                             choiceText = "\(choices[0].title)"
-                            choiceValues = "+\(choices[0].stressValue) Stress\n+\(choices[0].successValue) Success"
+                            choiceValues = "\(choices[0].stressValue >= 0 ? "+": "")\(choices[0].stressValue) Stress\n\(choices[0].successValue >= 0 ? "+": "")\(choices[0].successValue) Success"
                         } else if width > 1 {
                             choiceText = "\(choices[1].title)"
-                            choiceValues = "+\(choices[1].stressValue) Stress\n+\(choices[1].successValue) Success"
+                            choiceValues = "\(choices[1].stressValue >= 0 ? "+": "")\(choices[1].stressValue) Stress\n\(choices[1].successValue >= 0 ? "+": "")\(choices[1].successValue) Success"
                         }
                     }
                 }
@@ -77,9 +76,9 @@ struct CLDocumentComponent: View {
                     let width = value.translation.width
                     
                     if width < -100 {
-                        actionLeft(choices[0])
+                        action(choices[0])
                     } else if width > 100 {
-                        actionRight(choices[1])
+                        action(choices[1])
                     } else {
                         withAnimation() {
                             offset = CGSize.zero
@@ -91,7 +90,7 @@ struct CLDocumentComponent: View {
         )
     }
     
-    init(colorIdle: String, colorSelected: String, choices: [Choice], isPrologue: Bool, actionLeft: @escaping (Choice) -> Void, actionRight: @escaping (Choice) -> Void) {
+    init(colorIdle: String, colorSelected: String, choices: [Choice], isPrologue: Bool, action: @escaping (Choice) -> Void) {
         // Validate if the number of choices are equal to 2
         guard choices.count == 2 else {
             fatalError("Not enough choices.")
@@ -101,13 +100,12 @@ struct CLDocumentComponent: View {
         self.colorSelected = colorSelected
         self.choices = choices
         self.isPrologue = isPrologue
-        self.actionLeft = actionLeft
-        self.actionRight = actionRight
+        self.action = action
         
         _color = State(initialValue: colorIdle)
     }
 }
 
 #Preview {
-    CLDocumentComponent(colorIdle: "LightGrey", colorSelected:  "Black", choices: Decision.createDecisions()[0].choices, isPrologue: false, actionLeft: { _ in }, actionRight: { _ in })
+    CLDocumentDraggableComponent(colorIdle: "LightGrey", colorSelected:  "Black", choices: Decision.createDecisions()[0].choices, isPrologue: false, action: { _ in })
 }

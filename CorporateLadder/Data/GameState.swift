@@ -9,8 +9,6 @@ import Foundation
 
 enum GameState {
     case start
-    case prologue
-    case beggining
     case playing
     case ending
     case lost

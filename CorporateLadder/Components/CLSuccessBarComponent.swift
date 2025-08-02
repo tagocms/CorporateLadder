@@ -14,6 +14,16 @@ struct CLSuccessBarComponent: View {
     
     let height = 30.0
     
+    var progressValue: CGFloat {
+        if currentValue < 0 {
+            return 0
+        } else if currentValue > maxValue {
+            return CGFloat(maxValue)
+        } else {
+            return CGFloat(currentValue)
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             HStack(alignment: .center) {
@@ -39,7 +49,7 @@ struct CLSuccessBarComponent: View {
                         
                         RoundedRectangle(cornerRadius: 24)
                             .foregroundStyle(color)
-                            .frame(width: geometry.size.width * CGFloat(currentValue) / CGFloat(maxValue), height: height)
+                            .frame(width: geometry.size.width * progressValue / CGFloat(maxValue), height: height)
                     }
                 }
                 .frame(height: height)

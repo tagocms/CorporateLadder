@@ -28,7 +28,9 @@ struct GameStartView: View {
                     .cornerRadius(12)
                 
                 CLButtonComponent(style: .primary) {
-                    viewModel.gameState = .prologue
+                    withAnimation {
+                        viewModel.gameState = .playing
+                    }
                 }
                 
                 Spacer()

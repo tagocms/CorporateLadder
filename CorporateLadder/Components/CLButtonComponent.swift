@@ -10,6 +10,7 @@ import SwiftUI
 struct CLButtonComponent: View {
     let style: CLButtonStyle
     let action: () -> Void
+    let timer = Timer.publish(every: 0.6, on: .main, in: .common).autoconnect()
     
     var backgroundColor: Color {
         switch style {
@@ -33,6 +34,8 @@ struct CLButtonComponent: View {
         }
     }
     
+    @State private var isScaled = false
+    
     
     var body: some View {
         Button {
@@ -47,6 +50,12 @@ struct CLButtonComponent: View {
             .padding(.vertical, 8)
             .background(backgroundColor)
             .cornerRadius(16)
+            .scaleEffect(isScaled ? 1.1 : 1)
+        }
+        .onReceive(timer) { _ in
+            withAnimation {
+                isScaled.toggle()
+            }
         }
     }
 }

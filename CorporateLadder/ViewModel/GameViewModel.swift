@@ -10,7 +10,7 @@ import SwiftUI
 
 @Observable
 class GameViewModel {
-    var gameState = GameState.prologue
+    var gameState = GameState.start
     var month = Month.prologue
     var stressTotal = 0
     var successTotal = 0
@@ -81,7 +81,7 @@ class GameViewModel {
         case 60..<80:
             return "After this roller coaster of a year, you are afflicted with panic attacks frequently, and are unable to leave the house without being afraid because of the \(stressTotal) stress points you accumulated."
         case 80..<100:
-            return "You don't feel like leaving your room, eating or even talking to anyone else... the \(stressTotal) stress points really left a mark on you..."
+            return "You don't feel like leaving your room, eating or even talking to anyone else... the \(stressTotal) stress points really left a mark on you... you developed severe depression"
         case 100...:
             return "You have a total of \(stressTotal) stress points, which made you reach a terrifying burnout that forced you to quit your job..."
         default:
@@ -110,8 +110,6 @@ class GameViewModel {
     
     func handlePrologueChoice(_ choice: Choice) {
         goalChoice = choice.goalChoice!
-        month = .january
-        gameState = .beggining
     }
     
     func handleChoice(_ choice: Choice) {
@@ -119,6 +117,14 @@ class GameViewModel {
         
         stressTotal += choice.stressValue
         successTotal += choice.successValue
+        
+        if stressTotal < 0 {
+            stressTotal = 0
+        }
+        
+        if successTotal < 0 {
+            successTotal = 0
+        }
         
         // Treating user choices, to make sure future choices are affected as well
         switch choice.tag {
@@ -167,7 +173,7 @@ class GameViewModel {
     }
     
     func resetGame() {
-        gameState = GameState.prologue
+        gameState = GameState.playing
         month = Month.prologue
         stressTotal = 0
         successTotal = 0

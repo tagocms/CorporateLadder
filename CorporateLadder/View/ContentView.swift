@@ -13,15 +13,14 @@ struct ContentView: View {
     var body: some View {
         switch viewModel.gameState {
         case .start:
-            EmptyView()
-        case .prologue:
-            GamePrologueView(viewModel: $viewModel)
-        case .beggining:
-            GameBegginingView(viewModel: $viewModel)
+            GameStartView(viewModel: $viewModel)
+                .transition(.blurReplace)
         case .playing:
             GamePlayingView(viewModel: $viewModel)
+                .transition(.blurReplace)
         case .ending:
             GameFinishedView(viewModel: viewModel)
+                .transition(.blurReplace)
         case .lost:
             GameLostView(viewModel: viewModel)
         case .final:

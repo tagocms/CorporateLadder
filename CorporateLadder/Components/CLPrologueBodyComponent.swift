@@ -12,11 +12,9 @@ struct CLPrologueBodyComponent: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 30) {
-            CLDecisionTextComponent(decision: viewModel.prologue, color: viewModel.feelingColor)
+            CLHeaderTextComponent(decision: viewModel.prologue, color: viewModel.feelingColor)
             
-            CLDocumentComponent(colorIdle: "LightGrey", colorSelected: "LightBlue", choices: viewModel.prologue.choices, isPrologue: true) {
-                viewModel.handlePrologueChoice($0)
-            } actionRight: {
+            CLDocumentDraggableComponent(colorIdle: "LightGrey", colorSelected: "LightBlue", choices: viewModel.prologue.choices, isPrologue: true) {
                 viewModel.handlePrologueChoice($0)
             }
             
