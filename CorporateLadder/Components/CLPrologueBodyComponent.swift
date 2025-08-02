@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct PrologueBodyComponent: View {
+struct CLPrologueBodyComponent: View {
     @Binding var viewModel: GameViewModel
     
     var body: some View {
-        DecisionTextComponent(decision: viewModel.prologue)
+        CLDecisionTextComponent(decision: viewModel.prologue, color: viewModel.feelingColor)
         
         Spacer()
         
@@ -30,5 +30,5 @@ struct PrologueBodyComponent: View {
 #Preview {
     @Previewable @State var viewModel = GameViewModel()
     
-    PrologueBodyComponent(viewModel: $viewModel)
+    CLPrologueBodyComponent(viewModel: $viewModel)
 }

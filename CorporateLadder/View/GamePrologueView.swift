@@ -14,7 +14,7 @@ struct GamePrologueView: View {
         VStack {
             Spacer()
             
-            PrologueBodyComponent(viewModel: $viewModel)
+            CLPrologueBodyComponent(viewModel: $viewModel)
             
             Spacer()
         }

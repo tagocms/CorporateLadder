@@ -32,6 +32,23 @@ class GameViewModel {
     
     var selectedChoices = [Choice]()
     
+    var feelingColor: Color {
+        switch stressTotal {
+        case ..<0:
+            return .clLightBlue
+        case 0..<30:
+            return .clLightBlue
+        case 30..<60:
+            return .clOrange
+        case 60..<90:
+            return .clDarkOrange
+        case 90...:
+            return .black
+        default:
+            return .clLightBlue
+        }
+    }
+    
     var affliction: String {
         switch stressTotal {
         case ..<0:

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DecisionBodyComponent: View {
+struct CLDecisionBodyComponent: View {
     @Binding var viewModel: GameViewModel
     @State private var selectedChoice: Choice? = nil
     
@@ -34,7 +34,7 @@ struct DecisionBodyComponent: View {
                 }
             }
         } else {
-            DecisionTextComponent(decision: viewModel.decision)
+            CLDecisionTextComponent(decision: viewModel.decision, color: viewModel.feelingColor)
             
             Spacer()
             
@@ -56,5 +56,5 @@ struct DecisionBodyComponent: View {
     @Previewable @State var viewModel = GameViewModel()
     viewModel.month = .january
     
-    return DecisionBodyComponent(viewModel: $viewModel)
+    return CLDecisionBodyComponent(viewModel: $viewModel)
 }

@@ -25,7 +25,7 @@ struct GamePlayingView: View {
             
             Spacer()
             
-            DecisionBodyComponent(viewModel: $viewModel)
+            CLDecisionBodyComponent(viewModel: $viewModel)
             
             Spacer()
             

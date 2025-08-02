@@ -7,45 +7,74 @@
 
 import SwiftUI
 
-extension View {
-    func poppinsLargeTitle() -> some View {
-        modifier(PoppinsLargeTitle())
+extension View where Self == Text {
+    func poppinsLargeTitle() -> Text {
+        font(
+            Font.custom("Poppins", size: 40, relativeTo: .largeTitle)
+            .weight(.semibold)
+        )
     }
     
-    func poppinsTitle() -> some View {
-        modifier(PoppinsTitle())
+    func poppinsTitle() -> Text {
+        font(
+            Font.custom("Poppins", size: 32, relativeTo: .title)
+                .weight(.semibold)
+        )
     }
     
-    func poppinsTitle2() -> some View {
-        modifier(PoppinsTitle2())
+    func poppinsTitle2() -> Text {
+        font(
+            Font.custom("Poppins", size: 28, relativeTo: .title2)
+                .weight(.semibold)
+        )
     }
     
-    func poppinsTitle3() -> some View {
-        modifier(PoppinsTitle3())
+    func poppinsTitle3() -> Text {
+        font(
+            Font.custom("Poppins", size: 20, relativeTo: .title3)
+                .weight(.semibold)
+        )
     }
     
-    func poppinsBody() -> some View {
-        modifier(PoppinsBody())
+    func poppinsBody() -> Text {
+        font(
+            Font.custom("Poppins", size: 16, relativeTo: .body)
+                .weight(.semibold)
+        )
     }
     
-    func poppinsCaption() -> some View {
-        modifier(PoppinsCaption())
+    func poppinsCaption() -> Text {
+        font(
+            Font.custom("Poppins", size: 12, relativeTo: .caption)
+                .weight(.semibold)
+        )
     }
     
-    func poppinsSmall() -> some View {
-        modifier(PoppinsSmall())
+    func poppinsSmall() -> Text {
+        font(
+            Font.custom("Poppins", size: 6, relativeTo: .caption)
+                .weight(.semibold)
+        )
     }
     
-    func robotoTitle3() -> some View {
-        modifier(RobotoTitle3())
+    func robotoTitle3() -> Text {
+        font(
+            Font.custom("Roboto", size: 20, relativeTo: .title3)
+                .weight(.semibold)
+        )
     }
     
-    func robotoBody() -> some View {
-        modifier(RobotoBody())
+    func robotoBody() -> Text {
+        font(
+            Font.custom("Roboto", size: 16, relativeTo: .body)
+        )
     }
     
-    func robotoBodySemibold() -> some View {
-        modifier(RobotoBodySemibold())
+    func robotoBodySemibold() -> Text {
+        font(
+            Font.custom("Roboto", size: 16, relativeTo: .body)
+                .weight(.semibold)
+        )
     }
     
     
