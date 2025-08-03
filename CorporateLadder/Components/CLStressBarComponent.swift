@@ -35,6 +35,7 @@ struct CLStressBarComponent: View {
                 
                 Text("Stress")
                     .poppinsTitle3()
+                    .foregroundStyle(.black)
             }
             
             VStack(spacing: 0) {
@@ -62,19 +63,10 @@ struct CLStressBarComponent: View {
                     }
                 }
                 .frame(height: barHeight)
-                .padding(.bottom, 12)
                 
-                HStack {
-                    Text("0")
-                        .poppinsCaption()
-                    
-                    Spacer()
-                    
-                    Text("\(maxValue.formatted())")
-                        .poppinsCaption()
-                }
             }
         }
+        .padding(.bottom, 12)
     }
 }
 

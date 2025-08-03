@@ -40,6 +40,7 @@ struct CLDocumentButtonComponent: View {
         }
         .onTapGesture {
             action()
+            HapticsManager.shared.play(.success)
         }
     }
 }

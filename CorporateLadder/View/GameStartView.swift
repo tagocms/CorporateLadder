@@ -12,6 +12,8 @@ struct GameStartView: View {
     
     var body: some View {
         ZStack {
+            Color.white.ignoresSafeArea()
+            
             Image("Texture")
                 .resizable()
                 .scaledToFill()
@@ -27,7 +29,7 @@ struct GameStartView: View {
                     .background(Color.white.opacity(0.6))
                     .cornerRadius(12)
                 
-                CLButtonComponent(style: .primary) {
+                CLButtonComponent(text: "Climb the Ladder", color: .clLightBlue, style: .primary) {
                     withAnimation {
                         viewModel.gameState = .playing
                     }

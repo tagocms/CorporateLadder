@@ -23,60 +23,68 @@ struct CLDecisionBodyComponent: View {
                 
                 Spacer()
                 
-                VStack(alignment: .center, spacing: 30) {
+                VStack(alignment: .center) {
                     CLStressBarComponent(color: viewModel.feelingColor, currentValue: viewModel.stressTotal)
-                    
+                    Spacer()
                     if viewModel.month == .december {
-                        CLDocumentButtonComponent(color: viewModel.feelingColorImage, text: "Tap to move on...") {
+                        CLButtonComponent(text: "End game...", color: viewModel.feelingColor, style: .primary) {
                             withAnimation() {
                                 self.selectedChoice = nil
                                 viewModel.gameState = .ending
                             }
                         }
                     } else {
-                        CLDocumentButtonComponent(color: viewModel.feelingColorImage, text: "Tap to move on...") {
+                        CLButtonComponent(text: "Move on...", color: viewModel.feelingColor, style: .primary) {
                             withAnimation() {
                                 self.selectedChoice = nil
                                 viewModel.month = viewModel.month.next()
                             }
                         }
                     }
-                    
+                    Spacer()
                     CLSuccessBarComponent(color: viewModel.feelingColor, maxValue: viewModel.goalChoice.goalValue, currentValue: viewModel.successTotal)
                 }
+                .frame(height: UIScreen.main.bounds.height * 0.55)
                 .padding(12)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .stroke(.clDarkGrey)
                 )
             }
-            .transition(.scale)
+            .transition(.blurReplace)
         } else {
             Group {
                 if viewModel.month == .prologue {
-                    VStack(alignment: .center, spacing: 30) {
+                    VStack(alignment: .center) {
                         CLHeaderTextComponent(decision: viewModel.prologue, color: viewModel.feelingColor)
                         
-                        CLDocumentDraggableComponent(colorIdle: "LightGrey", colorSelected: "LightBlue", choices: viewModel.prologue.choices, isPrologue: true) { choice in
-                            withAnimation(nil) {
-                                viewModel.handlePrologueChoice(choice)
-                                selectedChoice = choice
-                            }
-                        }
+                        Spacer()
                         
-                        VStack(alignment: .leading) {
-                            Text("Swipe the document to the").robotoBody()
-                            + Text(" left ").robotoBodySemibold()
-                            + Text("to set your goal to be an").robotoBody()
-                            + Text(" Expert").robotoBodySemibold()
-                            + Text(".").robotoBody()
+                        VStack(spacing: 30) {
+                            CLDocumentDraggableComponent(colorIdle: "LightGrey", colorSelected: "LightBlue", choices: viewModel.prologue.choices, isPrologue: true) { choice in
+                                withAnimation(nil) {
+                                    viewModel.handlePrologueChoice(choice)
+                                    selectedChoice = choice
+                                }
+                            }
                             
-                            Text("\nSwipe the document to the").robotoBody()
-                            + Text(" right ").robotoBodySemibold()
-                            + Text("to set your goal to be a").robotoBody()
-                            + Text(" Manager").robotoBodySemibold()
-                            + Text(".").robotoBody()
+                            VStack(alignment: .leading) {
+                                Text("Swipe the document to the").robotoBody()
+                                + Text(" left ").robotoBodySemibold()
+                                + Text("to set your goal to be an").robotoBody()
+                                + Text(" Expert").robotoBodySemibold()
+                                + Text(".").robotoBody()
+                                
+                                Text("\nSwipe the document to the").robotoBody()
+                                + Text(" right ").robotoBodySemibold()
+                                + Text("to set your goal to be a").robotoBody()
+                                + Text(" Manager").robotoBodySemibold()
+                                + Text(".").robotoBody()
+                            }
+                            .foregroundStyle(.black)
+                            .shadow(color: viewModel.feelingColor, radius: 10)
                         }
+                        .frame(height: UIScreen.main.bounds.height * 0.55)
                         
                         Spacer()
                     }
@@ -86,18 +94,19 @@ struct CLDecisionBodyComponent: View {
                         
                         Spacer()
                         
-                        VStack(alignment: .center, spacing: 30) {
+                        VStack(alignment: .center) {
                             CLStressBarComponent(color: viewModel.feelingColor, currentValue: viewModel.stressTotal)
-                            
+                            Spacer()
                             CLDocumentDraggableComponent(colorIdle: "LightGrey", colorSelected: viewModel.feelingColorImage, choices: viewModel.decision.choices, isPrologue: false) { choice in
                                 withAnimation(nil) {
                                     viewModel.handleChoice(choice)
                                     selectedChoice = choice
                                 }
                             }
-                            
+                            Spacer()
                             CLSuccessBarComponent(color: viewModel.feelingColor, maxValue: viewModel.goalChoice.goalValue, currentValue: viewModel.successTotal)
                         }
+                        .frame(height: UIScreen.main.bounds.height * 0.55)
                         .padding(12)
                         .background(
                             RoundedRectangle(cornerRadius: 12)

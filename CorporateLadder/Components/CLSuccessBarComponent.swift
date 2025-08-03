@@ -34,6 +34,7 @@ struct CLSuccessBarComponent: View {
                 
                 Text("Success")
                     .poppinsTitle3()
+                    .foregroundStyle(.black)
             }
             
             VStack(spacing: 0) {
@@ -63,6 +64,7 @@ struct CLSuccessBarComponent: View {
                     Text("\(maxValue.formatted())")
                         .poppinsCaption()
                 }
+                .foregroundStyle(.black)
             }
         }
     }

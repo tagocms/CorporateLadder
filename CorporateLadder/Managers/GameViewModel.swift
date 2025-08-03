@@ -73,38 +73,38 @@ class GameViewModel {
         case 0..<10:
             return "Fortunately, you were not afflicted with any mental illness during this year!"
         case 10..<20:
-            return "Unfortunately, you developed anxiety disorder as a response to the constant pressure you were put under, because of the \(stressTotal) stress points you accumulated."
+            return "Unfortunately, you developed anxiety disorder as a response to the constant pressure you were put under, because of the **\(stressTotal) stress points** you accumulated."
         case 20..<40:
-            return "To cope with the \(stressTotal) stress points you accumulated, you developed an addiction to substances."
+            return "To cope with the **\(stressTotal) stress points** you accumulated, you developed an addiction to substances."
         case 40..<60:
-            return "As a result of having to be extremely attentive to detail and accumulating \(stressTotal) stress points, you developed severe Obsessive-Compulsive Disorder."
+            return "As a result of having to be extremely attentive to detail and accumulating **\(stressTotal) stress points**, you developed severe Obsessive-Compulsive Disorder."
         case 60..<80:
-            return "After this roller coaster of a year, you are afflicted with panic attacks frequently, and are unable to leave the house without being afraid because of the \(stressTotal) stress points you accumulated."
+            return "After this roller coaster of a year, you are afflicted with panic attacks frequently, and are unable to leave the house without being afraid because of the **\(stressTotal) stress points** you accumulated."
         case 80..<100:
-            return "You don't feel like leaving your room, eating or even talking to anyone else... the \(stressTotal) stress points really left a mark on you... you developed severe depression"
+            return "You don't feel like leaving your room, eating or even talking to anyone else... the **\(stressTotal) stress points** really left a mark on you... you developed severe depression."
         case 100...:
-            return "You have a total of \(stressTotal) stress points, which made you reach a terrifying burnout that forced you to quit your job..."
+            return "You have a total of **\(stressTotal) stress points**, which made you reach a terrifying burnout that forced you to quit your job..."
         default:
             return "You feel as if you wasted a whole year doing nothing and feel no purpose in life anymore."
         }
     }
     
     var ending: String {
-        let description = goalChoice == .expert ? "an expert in your field" : "a manager"
+        let description = goalChoice == .expert ? "**an expert in your field**" : "**a manager**"
         
         switch successTotal {
         case ..<100:
-            return "Unfortunately, with \(successTotal) success points, you did not achieve your goal of becoming \(description)."
+            return "Unfortunately, with **\(successTotal) success points**, you did not achieve your goal of becoming \(description)."
         case 100..<200:
             if goalChoice == .expert {
-                return "With \(successTotal) success points, you achieved your goal of becoming \(description)!"
+                return "With **\(successTotal) success points**, you achieved your goal of becoming \(description)!"
             } else {
-                return "Unfortunately, with \(successTotal) success points, you did not achieve your goal of becoming \(description)."
+                return "Unfortunately, with **\(successTotal) success points**, you did not achieve your goal of becoming \(description)."
             }
         case 200...:
-            return "With \(successTotal) success points, you achieved your goal of becoming \(description)!"
+            return "With **\(successTotal) success points**, you achieved your goal of becoming \(description)!"
         default:
-            return "Unfortunately, with \(successTotal) success points, you did not achieve your goal of becoming \(description)."
+            return "Unfortunately, with **\(successTotal) success points**, you did not achieve your goal of becoming \(description)."
         }
     }
     
@@ -141,6 +141,7 @@ class GameViewModel {
         case .course:
             let decision = decisions[5] // June
             decision.subtitle = "This is it. The final weeks until the HR Course you applied to on April. But, if you are to get accepted, you must work harder in order to be the high-performing employee HR is looking for."
+            decision.callToAction = "What will you do?"
             
             decision.choices.removeAll()
             decision.choices.append(contentsOf: [Choice(title: "Push yourself to get accepted in the course and take it", subtitle: "You did it! You earned the high-performing stamp on your resume. Also, you got to take the course and ended up learning a lot of leadership skills. The problem is that this push for performance took a toll on you...", stressValue: 25, successValue: 40),

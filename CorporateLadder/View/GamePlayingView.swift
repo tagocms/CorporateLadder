@@ -11,20 +11,23 @@ struct GamePlayingView: View {
     @Binding var viewModel: GameViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
-            CLDecisionBodyComponent(viewModel: $viewModel)
-        }
-        .padding(24)
-        .onChange(of: viewModel.stressTotal) {
-            viewModel.stressCheck()
+        ZStack {
+            Color.white.ignoresSafeArea()
+            
+            VStack(alignment: .leading) {
+                CLDecisionBodyComponent(viewModel: $viewModel)
+            }
+            .padding(24)
+            .onChange(of: viewModel.stressTotal) {
+                viewModel.stressCheck()
+            }
         }
     }
 }
 
 #Preview {
     @Previewable @State var viewModel = GameViewModel()
-    viewModel.month = .january
-    viewModel.goalChoice = .manager
+    viewModel.month = .prologue
     
     return GamePlayingView(viewModel: $viewModel)
 }

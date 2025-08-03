@@ -13,15 +13,17 @@ struct CLDocumentDraggableComponent: View {
     let choices: [Choice]
     let isPrologue: Bool
     let action: (Choice) -> Void
+    let timer = Timer.publish(every: 0.6, on: .main, in: .common).autoconnect()
     
     @State private var color: String
     @State private var offset = CGSize.zero
     @State private var choiceText = ""
     @State private var choiceValues = ""
+    @State private var isScaled = false
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            ZStack {
+            ZStack(alignment: .leading) {
                 Image("document\(color)")
                     .resizable()
                     .scaledToFit()
@@ -51,15 +53,22 @@ struct CLDocumentDraggableComponent: View {
             }
         }
         .frame(width: 200)
-        .offset(x: offset.width * 5)
+        .scaleEffect(isScaled ? 1.1 : 1)
+        .offset(x: offset.width * 2)
         .rotationEffect(.degrees(offset.width / 10.0))
         .gesture(
             DragGesture()
                 .onChanged { value in
+                    withAnimation {
+                        isScaled = false
+                    }
                     color = colorSelected
+                    
                     let width = value.translation.width
-                    // Fix anymation later
-                    offset = value.translation
+                    // Fix animation later
+                    withAnimation {
+                        offset = value.translation
+                    }
                     
                     withAnimation(nil) {
                         if width < -1 {
@@ -77,17 +86,29 @@ struct CLDocumentDraggableComponent: View {
                     
                     if width < -100 {
                         action(choices[0])
+                        HapticsManager.shared.play(.success)
+                        SoundManager.instance.playSound(name: "stamp")
                     } else if width > 100 {
                         action(choices[1])
+                        HapticsManager.shared.play(.success)
+                        SoundManager.instance.playSound(name: "stamp")
                     } else {
                         withAnimation() {
                             offset = CGSize.zero
                         }
                         choiceText = ""
                         choiceValues = ""
+                        HapticsManager.shared.play(.warning)
                     }
                 }
         )
+        .onReceive(timer) { _ in
+            if offset == .zero {
+                withAnimation {
+                    isScaled.toggle()
+                }
+            }
+        }
     }
     
     init(colorIdle: String, colorSelected: String, choices: [Choice], isPrologue: Bool, action: @escaping (Choice) -> Void) {

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CLButtonComponent: View {
+    let text: String
+    let color: Color
     let style: CLButtonStyle
     let action: () -> Void
     let timer = Timer.publish(every: 0.6, on: .main, in: .common).autoconnect()
@@ -15,7 +17,7 @@ struct CLButtonComponent: View {
     var backgroundColor: Color {
         switch style {
         case .primary:
-                .clLightBlue
+                color
         case .secondary:
                 .white
         case .terciary:
@@ -40,9 +42,10 @@ struct CLButtonComponent: View {
     var body: some View {
         Button {
             action()
+            HapticsManager.shared.play(.success)
         } label: {
             HStack(alignment: .center, spacing: 10) {
-                Text("Climb the Ladder")
+                Text(text)
                     .foregroundStyle(foregroundStyle)
                     .robotoTitle3()
             }
@@ -58,6 +61,13 @@ struct CLButtonComponent: View {
             }
         }
     }
+    
+    init(text: String, color: Color = .clLightBlue, style: CLButtonStyle, action: @escaping () -> Void) {
+        self.text = text
+        self.color = color
+        self.style = style
+        self.action = action
+    }
 }
 
 enum CLButtonStyle {
@@ -65,5 +75,5 @@ enum CLButtonStyle {
 }
 
 #Preview {
-    CLButtonComponent(style: .primary, action: {})
+    CLButtonComponent(text: "Climb the Ladder", color: .clLightBlue, style: .primary, action: {})
 }

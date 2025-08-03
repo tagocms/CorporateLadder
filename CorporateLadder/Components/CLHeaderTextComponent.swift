@@ -28,7 +28,7 @@ struct CLHeaderTextComponent: View {
                                 .robotoBody()
                             Text("Your goal is to reach the").robotoBody()
                             + Text(" \(goalChoice?.rawValue ?? "Expert") position").robotoBodySemibold()
-                            + Text(", and that requires a total of").robotoBody()
+                            + Text(", and that requires a total of ").robotoBody()
                             + Text("\(goalChoice?.goalValue ?? 100) success points").robotoBodySemibold()
                             + Text(".\n")
                             Text("You also have to limit your stress level,").robotoBody()
@@ -42,10 +42,11 @@ struct CLHeaderTextComponent: View {
                                     .robotoBodySemibold()
                             }
                     }
+                    .foregroundStyle(.black)
                 }
-                .frame(height: UIScreen.main.bounds.height * 0.15)
                 .scrollIndicatorsFlash(onAppear: true)
                 .scrollBounceBehavior(.basedOnSize)
+                .shadow(color: color, radius: 10)
             }
     }
     
