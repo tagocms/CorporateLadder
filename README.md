@@ -7,10 +7,18 @@
 </p>
 
 <p align="center">
+  <a href="https://apps.apple.com/us/app/corporate-ladder/id6749512183">
+    <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store" height="50">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://apps.apple.com/us/app/corporate-ladder/id6749512183">
+    <img src="https://img.shields.io/itunes/v/6749512183?label=App%20Store&logo=apple" alt="App Store Version">
+  </a>
   <img src="https://img.shields.io/badge/Swift-5.0-orange?logo=swift" alt="Swift 5.0">
   <img src="https://img.shields.io/badge/SwiftUI-blue?logo=swift" alt="SwiftUI">
   <img src="https://img.shields.io/badge/iOS-17.6%2B-lightgrey?logo=apple" alt="iOS 17.6+">
-  <img src="https://img.shields.io/badge/version-1.0-brightgreen" alt="Version 1.0">
   <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
 </p>
 
@@ -53,3 +61,5 @@ Each month presents a real workplace dilemma — pitching side projects, office 
 ## License
 
 Corporate Ladder is available under the [MIT License](./LICENSE).
+
+The app is published on the [App Store](https://apps.apple.com/us/app/corporate-ladder/id6749512183).
